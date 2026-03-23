@@ -16,6 +16,7 @@ import { UserPanel } from './components/user-panel/user-panel';
   selector: 'app-root',
   standalone: true,
   imports: [
+    RouterOutlet,
     MatSidenavModule,
     MatToolbarModule,
     Category,
