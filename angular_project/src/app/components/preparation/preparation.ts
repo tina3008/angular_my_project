@@ -1,14 +1,5 @@
-// import { Component } from '@angular/core';
 
-// @Component({
-//   selector: 'app-preparation',
-//   imports: [],
-//   templateUrl: './preparation.html',
-//   styleUrl: './preparation.css',
-// })
-// export class Preparation {}
-
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,32 +9,76 @@ import { QuestionItem } from '../category/category.config';
 import { TruncatePipe } from '../../pipes/truncate-pipe';
 import { GenerateAnswerModal } from '../generate-answer-modal/generate-answer-modal';
 
+import { ActivatedRoute } from '@angular/router';
+import { Subject, switchMap, takeUntil } from 'rxjs';
+import { PreparationService } from '../../services/preparation';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-preparation',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, TruncatePipe],
+  imports: [MatTableModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './preparation.html',
   styleUrl: './preparation.css',
 })
 export class Preparation {
   displayedColumns: string[] = ['position', 'question', 'actions'];
-  dataSource = new MatTableDataSource<QuestionItem>(MOCK_DATA);
+  dataSource = new MatTableDataSource<QuestionItem>();
+  category: string = '';
+  isLoading = false;
 
-  constructor(public dialog: MatDialog) {}
+  private destroy$ = new Subject<void>();
 
-  openGenerateDialog(question: QuestionItem): void {
+  constructor(
+    public dialog: MatDialog,
+    public preparationService: PreparationService,
+    private route: ActivatedRoute,
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((queryParams) => {
+          this.category = queryParams['tabName'] || '';
+          this.isLoading = true;
+          return this.preparationService.getPreparationQuestionsByCategory(this.category);
+        }),
+      )
+      .subscribe((response) => {
+        this.isLoading = false;
+        this.dataSource = response.data as any;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  updateAnswer(categoryName: string, question: Partial<QuestionItem>, id: number): void {
+    this.preparationService
+      .updatePreparationQuestionById(categoryName, question, id)
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
+  openGenerateDialog(question: QuestionItem, index: number): void {
     const dialogRef = this.dialog.open(GenerateAnswerModal, {
       width: '500px',
       data: {
-        question: question.question,
-        answer: question.answer,
+        // question: question.question,
+        // answer: question.answer,
+        ...question,
+        index,
       },
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
       console.log('The dialog was closed', result);
       if (result) {
-        // TODO - call the service for updating an answer
+        this.updateAnswer(this.category, { answer: result }, question.id);
       }
     });
   }
@@ -57,8 +92,14 @@ export class Preparation {
       console.log('The dialog was closed', result);
       if (result) {
         console.log('Question would be deleted.', question);
-        // TODO - call the service for deleting an answer
+        this.deleteAnswer(this.category, question.id);
       }
     });
+  }
+
+  deleteAnswer(categoryName: string, id: number): void {
+    this.preparationService
+      .deletePreparationQuestionById(categoryName, id)
+      .subscribe((response) => console.log(response));
   }
 }
