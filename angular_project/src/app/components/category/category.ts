@@ -55,9 +55,17 @@ export class Category implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  deleteAnswer(categoryName: string, id: number): void {
-    this.categoriesService.deleteCategoryQuestionById(categoryName, id).subscribe((response) => {
-      console.log(response);
+  // deleteAnswer(categoryName: string, id: number): void {
+  //   this.categoriesService.deleteCategoryQuestionById(categoryName, id).subscribe((response) => {
+  //     console.log(response);
+  //   });
+  // }
+
+  deleteAnswer(id: number): void {
+    this.categoriesService.deleteCategoryQuestionById(id).subscribe(() => {
+      console.log('Deleted');
+
+         this.dataSource.data = this.dataSource.data.filter((q) => q.id !== id);
     });
   }
 
@@ -70,7 +78,8 @@ export class Category implements OnInit, OnDestroy {
       console.log('The dialog was closed', result);
       if (result) {
         console.log('Question would be deleted.', question);
-          this.deleteAnswer(this.category, question.id);
+        // this.deleteAnswer(this.category, question.id);
+        this.deleteAnswer(question.id);
       }
     });
   }

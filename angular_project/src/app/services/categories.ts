@@ -8,7 +8,6 @@ import { get } from 'lodash';
 @Injectable({
   providedIn: 'root',
 })
-
 export class Categories {
   public baseUrl = 'http://localhost:3000';
 
@@ -34,11 +33,15 @@ export class Categories {
       );
   }
 
-  deleteCategoryQuestionById(categoryName: string, id: number): Observable<Response<QuestionItem>> {
-    // return of();
+  // deleteCategoryQuestionById(categoryName: string, id: number): Observable<Response<QuestionItem>> {
+  //   // return of();
 
-    return this.http.delete<Response<QuestionItem>>(
-      `${this.baseUrl}/category/${categoryName}/${id}`,
-    );
+  //   return this.http.delete<Response<QuestionItem>>(
+  //     `${this.baseUrl}/category/${categoryName}/${id}`,
+  //   );
+  // }
+
+  deleteCategoryQuestionById(id: number): Observable<Response<QuestionItem>> {
+    return this.http.delete<Response<QuestionItem>>(`${this.baseUrl}/questions/${id}`);
   }
 }

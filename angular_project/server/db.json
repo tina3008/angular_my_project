@@ -784,12 +784,6 @@
       "categoryId": 1
     },
     {
-      "id": 127,
-      "question": "Що таке TypeScript?",
-      "answer": "",
-      "categoryId": 2
-    },
-    {
       "id": 128,
       "question": "Яка основна різниця між TypeScript і JavaScript?",
       "answer": "",
@@ -1202,12 +1196,6 @@
       "question": "Як реалізувати Advanced Types?",
       "answer": "",
       "categoryId": 2
-    },
-    {
-      "id": 197,
-      "question": "Що таке JavaScript?",
-      "answer": "",
-      "categoryId": 3
     },
     {
       "id": 198,
