@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { SignInService } from '../../services/sign-in/sign-in';
+
 
 @Component({
   selector: 'app-sign-in-modal',
@@ -18,20 +20,22 @@ export class SignInModal {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<SignInModal>,
+    public signInService: SignInService,
   ) {
     this.signInForm = this.fb.group({
-      login: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
-
   onSubmit() {
     if (this.signInForm.valid) {
       const { login, password } = this.signInForm.value;
       console.log('Login:', login);
       console.log('Password:', password);
       // TODO - Call the service
-      this.dialogRef.close(this.signInForm.value);
+      this.signInService.login(login, password).subscribe(() => {
+        this.dialogRef.close(this.signInForm.value);
+      });
     }
   }
 

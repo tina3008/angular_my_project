@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 
+import { SignUpService } from '../../services/sign-up/sign-up';
+import { log } from 'console';
 @Component({
   selector: 'app-sign-up-modal',
   standalone: true,
@@ -19,6 +21,7 @@ export class SignUpModal {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<SignUpModal>,
+    public signUpService: SignUpService,
   ) {
     this.signUpForm = this.fb.group({
       login: ['', Validators.required],
@@ -31,14 +34,15 @@ export class SignUpModal {
 
   onSubmit() {
     if (this.signUpForm.valid) {
-      const { login, password, email, firstName, lastName } = this.signUpForm.value;
-      console.log('Login:', login);
-      console.log('Password:', password);
-      console.log('Email:', email);
-      console.log('First Name:', firstName);
-      console.log('Last Name:', lastName);
-      // TODO - Call the service
-      this.dialogRef.close(this.signUpForm.value);
+      const { login, email, password, firstName, lastName } = this.signUpForm.value;
+      this.signUpService.register(login, email, password, firstName, lastName).subscribe(() => {
+        this.dialogRef.close(this.signUpForm.value);
+        console.log('sigup-email', email);
+        console.log('sigup-password', password);
+        console.log('sigup-firstName', firstName);
+        console.log('sigup-lastName', lastName);
+
+      });
     }
   }
 

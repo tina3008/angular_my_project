@@ -1,11 +1,44 @@
 {
   "users": [
     {
+      "login": "test",
       "email": "test@gmail.com",
       "password": "$2a$10$oZvVB68NMvW8AApvAMfUxOeImVnY8pyQUtbak.4dKBmvYEpXxE4N.",
       "firstName": "Test",
       "lastName": "Art",
       "id": 1
+    },
+    {
+      "login": "aaa",
+      "email": "aaa@aaa.aaa",
+      "password": "111111",
+      "firstName": "aaa",
+      "lastName": "aaa",
+      "id": 2
+    },
+    {
+      "login": "aaa",
+      "email": "aaa@aaa.aaa",
+      "password": "111111",
+      "firstName": "aaa",
+      "lastName": "aaa",
+      "id": 3
+    },
+    {
+      "login": "www",
+      "email": "www@www.www",
+      "password": "wwwwww",
+      "firstName": "www",
+      "lastName": "www",
+      "id": 4
+    },
+    {
+      "login": "www",
+      "email": "www@www.www",
+      "password": "wwwwww",
+      "firstName": "www",
+      "lastName": "www",
+      "id": 5
     }
   ],
   "categories": [
