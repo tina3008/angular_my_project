@@ -29,11 +29,11 @@ export class SignInModal {
   }
   onSubmit() {
     if (this.signInForm.valid) {
-      const { login, password } = this.signInForm.value;
-      console.log('Login:', login);
+      const { email, password } = this.signInForm.value;
+      console.log('Login:', email);
       console.log('Password:', password);
       // TODO - Call the service
-      this.signInService.login(login, password).subscribe(() => {
+      this.signInService.login(email, password).subscribe(() => {
         this.dialogRef.close(this.signInForm.value);
       });
     }
@@ -43,8 +43,8 @@ export class SignInModal {
     this.dialogRef.close();
   }
 
-  get login() {
-    return this.signInForm.get('login');
+  get email() {
+    return this.signInForm.get('email');
   }
 
   get password() {

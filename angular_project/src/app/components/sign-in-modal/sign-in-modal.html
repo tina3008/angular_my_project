@@ -1,10 +1,10 @@
 <h2 class="modal-header">Sign In</h2>
 <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="fill">
-    <mat-label>Login</mat-label>
-    <input matInput formControlName="login" required />
-    @if (login?.invalid && (login?.dirty || login?.touched)) {
-      <mat-error>Login is required</mat-error>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" required />
+    @if (email?.invalid && (email?.dirty || email?.touched)) {
+      <mat-error>Email is required</mat-error>
     }
   </mat-form-field>
   <mat-form-field appearance="fill">

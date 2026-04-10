@@ -9,36 +9,20 @@
       "id": 1
     },
     {
-      "login": "aaa",
-      "email": "aaa@aaa.aaa",
-      "password": "111111",
-      "firstName": "aaa",
-      "lastName": "aaa",
-      "id": 2
+      "login": "ddd",
+      "email": "d@ddd.com",
+      "password": "dddddd",
+      "firstName": "ddd",
+      "lastName": "ddd",
+      "id": 8
     },
     {
-      "login": "aaa",
-      "email": "aaa@aaa.aaa",
-      "password": "111111",
-      "firstName": "aaa",
-      "lastName": "aaa",
-      "id": 3
-    },
-    {
-      "login": "www",
-      "email": "www@www.www",
-      "password": "wwwwww",
-      "firstName": "www",
-      "lastName": "www",
-      "id": 4
-    },
-    {
-      "login": "www",
-      "email": "www@www.www",
-      "password": "wwwwww",
-      "firstName": "www",
-      "lastName": "www",
-      "id": 5
+      "login": "vvv",
+      "email": "v@vvv.com",
+      "password": "мммммм",
+      "firstName": "vvv",
+      "lastName": "vvv",
+      "id": 9
     }
   ],
   "categories": [
@@ -64,12 +48,6 @@
       "id": 1,
       "question": "Що таке Angular?",
       "answer": "Angular — це платформа і фреймворк для розробки динамічних веб-додатків на мові TypeScript, який підтримується командою Google. Angular забезпечує розробників інструментами та бібліотеками для створення масштабованих, підтримуваних і високопродуктивних веб-додатків. Основні можливості Angular включають декларативне програмування для створення користувацького інтерфейсу, двостороннє зв’язування даних для синхронізації між моделлю і представленням, потужну систему модулів для організації коду, підтримку форм і валідації, а також засоби для роботи з маршрутизацією та HTTP-запитами. Angular також інтегрується з іншими бібліотеками та фреймворками, що дозволяє розробникам використовувати найкращі інструменти для вирішення конкретних завдань.",
-      "categoryId": 1
-    },
-    {
-      "id": 2,
-      "question": "Як встановити Angular CLI?",
-      "answer": "",
       "categoryId": 1
     },
     {

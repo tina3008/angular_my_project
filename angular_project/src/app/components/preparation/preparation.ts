@@ -4,14 +4,13 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationModal } from '../delete-confirmation-modal/delete-confirmation-modal';
-import { MOCK_DATA } from './preparation.config';
 import { QuestionItem } from '../category/category.config';
 import { TruncatePipe } from '../../pipes/truncate-pipe';
 import { GenerateAnswerModal } from '../generate-answer-modal/generate-answer-modal';
 
 import { ActivatedRoute } from '@angular/router';
 import { Subject, switchMap, takeUntil } from 'rxjs';
-import { PreparationService } from '../../services/preparation';
+import { PreparationService } from '../../services/preparation/preparation';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
@@ -58,7 +57,7 @@ export class Preparation {
 
   updateAnswer(categoryName: string, question: Partial<QuestionItem>, id: number): void {
     this.preparationService
-      .updatePreparationQuestionById(categoryName, question, id)
+      .updatePreparationQuestionById(question, id)
       .subscribe((response) => {
         console.log(response);
       });

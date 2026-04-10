@@ -23,13 +23,6 @@ export class SignUpService {
     lastName: string,
   ): Observable<UserRegisterResponse> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    // const body = JSON.stringify({
-    //   login,
-    //   email,
-    //   password,
-    //   firstName,
-    //   lastName,
-    // });
 
     const body = {
       login,
@@ -38,13 +31,12 @@ export class SignUpService {
       firstName,
       lastName,
     };
-    return this.http.post<UserRegisterResponse>(`${this.apiUrl}/users`, body, { headers }).pipe(
+    return this.http.post<UserRegisterResponse>(`${this.apiUrl}/register`, body, { headers }).pipe(
       tap((response) => {
         if (response.accessToken) {
           this.storageService.setToken(response.accessToken);
         }
       }),
     );
-    // return this.http.post<UserRegisterResponse>(`${this.apiUrl}/users`, body);
    }
 }

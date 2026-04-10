@@ -7,12 +7,10 @@ import { GenerateAnswerModal } from '../generate-answer-modal/generate-answer-mo
 import { DeleteConfirmationModal } from '../delete-confirmation-modal/delete-confirmation-modal';
 import { TruncatePipe } from '../../pipes/truncate-pipe';
 
-
 import { ActivatedRoute } from '@angular/router';
 import { Subject, switchMap, takeUntil } from 'rxjs';
-import { Categories } from '../../services/categories';
+import { CategoriesService } from '../../services/categories';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 
 @Component({
   selector: 'app-category',
@@ -31,7 +29,7 @@ export class Category implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    public categoriesService: Categories,
+    public categoriesService: CategoriesService,
     private route: ActivatedRoute,
   ) {}
   ngOnInit(): void {
@@ -55,17 +53,11 @@ export class Category implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  // deleteAnswer(categoryName: string, id: number): void {
-  //   this.categoriesService.deleteCategoryQuestionById(categoryName, id).subscribe((response) => {
-  //     console.log(response);
-  //   });
-  // }
-
   deleteAnswer(id: number): void {
     this.categoriesService.deleteCategoryQuestionById(id).subscribe(() => {
       console.log('Deleted');
 
-         this.dataSource.data = this.dataSource.data.filter((q) => q.id !== id);
+      this.dataSource.data = this.dataSource.data.filter((q) => q.id !== id);
     });
   }
 
