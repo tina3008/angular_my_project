@@ -16,3 +16,8 @@ app.use(router);
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
 });
+
+
+// npx json-server db.json --routes routes.json
+// npx json-server-auth server/db.json --routes server/routes.json --port 3000
+// node server.js
